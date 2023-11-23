@@ -25,4 +25,17 @@ self.addEventListener("install", (event) => {
   );
 });
 
+// Cache first, 
+const cacheFirst = async (request) => {
+  const cache = await caches.open(STATIC_CACHE_NAME);
+  const responseFromCache = await cache.match(request);
+  if (responseFromCache) {
+    return responseFromCache;
+  }
+  return fetch(request);
+};
+self.addEventListener("fetch", (event) => {
+  event.respondWith(cacheFirst(event.request));
+});
+
 self.skipWaiting();
