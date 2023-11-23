@@ -1,0 +1,34 @@
+{
+  "short_name": "Todo-list",
+  "name": "Todo-list: Is procrastinate still trendy?",
+  "icons": [
+    {
+      "src": "/icons/pwa-64x64.png",
+      "type": "image/png",
+      "sizes": "64x64"
+    },
+    {
+      "src": "/icons/pwa-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icons/pwa-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/icons/maskable-icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "id": "/?source=pwa",
+  "start_url": "/?source=pwa",
+  "background_color": "#333",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#333",
+  "description": "Simple todo list application"
+}
