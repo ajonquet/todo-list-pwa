@@ -25,6 +25,24 @@ self.addEventListener("install", (event) => {
   );
 });
 
+
+// background.css
+self.addEventListener("fetch", (event) => {
+  // Si la requête cible une url contenant le fichier background.css
+  if (event.request.url.includes("background.css")) {
+    // La réponse produite sera
+    event.respondWith(
+      // Le résultat de la requête vers le fichier background.css
+      fetch(event.request)
+      // Ou en cas d'échec
+      .catch(() => {
+        // une réponse fabriquée avec un fond orange
+        return new Response(".main {background: orange;}", { headers: { "Content-Type": "text/css" }});
+      })
+    )
+  }
+});
+
 // Cache first, 
 const cacheFirst = async (request) => {
   const cache = await caches.open(STATIC_CACHE_NAME);
@@ -38,4 +56,4 @@ self.addEventListener("fetch", (event) => {
   event.respondWith(cacheFirst(event.request));
 });
 
-self.skipWaiting();
+// self.skipWaiting();
