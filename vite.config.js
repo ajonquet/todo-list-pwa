@@ -17,6 +17,7 @@ export default defineConfig({
     VitePWA({
       strategies: 'injectManifest',
       manifest,
+			includeAssets: 'icons/**/*',
     }),
   ],
 })
