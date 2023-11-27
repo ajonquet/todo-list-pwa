@@ -1,4 +1,4 @@
-import InstallButton from "./InstallButton";
+import InstallButton from "./PwaButtons";
 
 export default function Footer() {
     return (

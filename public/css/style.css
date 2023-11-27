@@ -104,10 +104,15 @@ input[type="submit"] {
   font-size: xxx-large;
 }
 
-.install-button {
+.pwa-buttons {
   position: absolute;
   bottom: 0;
   right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.pwa-button {
   border: 2px solid #000;
   border-radius: 2px;
   background-color: aliceblue;
