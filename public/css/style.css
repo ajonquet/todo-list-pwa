@@ -9,6 +9,7 @@ html, body {
   height: 100%;
   max-width: 1280px;
   margin: auto;
+  position: relative;
 }
 
 header {
@@ -101,4 +102,15 @@ input[type="submit"] {
 .progress-bar {
   text-align: center;
   font-size: xxx-large;
+}
+
+.install-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: 2px solid #000;
+  border-radius: 2px;
+  background-color: aliceblue;
+  padding: .5em;
+  cursor: pointer;
 }
