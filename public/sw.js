@@ -1,5 +1,7 @@
 import { cleanupOutdatedCaches, precacheAndRoute } from 'workbox-precaching'
 import {registerRoute} from 'workbox-routing';
+import { NetworkFirst } from 'workbox-strategies';
+import { ExpirationPlugin } from 'workbox-expiration';
 
 const exludeAssets = ["background.css"]
 
@@ -20,25 +22,16 @@ registerRoute(({url}) => url.pathname.endsWith("background.css"), ({event}) => {
   );
 });
 
-// Network first, falling back to cache
-const API_CACHE_NAME = 'todosApi.v1';
-const networkWithCacheFallback = async (request) => {
-  const cache = await caches.open(API_CACHE_NAME);
-  try {
-    const fetchedResponse = await fetch(request);
-    cache.put(request, fetchedResponse.clone());
-    return fetchedResponse;
-  }
-  catch (e) {
-    return cache.match(request);
-  }
-}
-self.addEventListener("fetch", async (event) => {
-  if (!event.request.url.includes("localhost:7000/todos") || event.request.method !== "GET") {
-    return;
-  }
-  event.respondWith(networkWithCacheFallback(event.request));
-});
-
+registerRoute(
+  ({event}) => event.request.url.includes("localhost:7000/todos") && event.request.method === "GET", 
+  new NetworkFirst({
+    cacheName: 'todos',
+    plugins: [
+      new ExpirationPlugin({
+        maxAgeSeconds: 60 * 60 * 24 * 30,
+      })
+    ]  
+  })
+);
 
 self.skipWaiting();
