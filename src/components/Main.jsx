@@ -9,7 +9,7 @@ export default function Main() {
   return (
         <main className="main">
             <FormAddTodo addTodo={addTodo} />
-            <TodoList todos={todos} isLoading={isLoading} toggleTodo={toggleTodo} deleteTodo={deleteTodo} updateTodo={updateTodo} />
+            <TodoList todos={todos} isLoading={isLoading} toggleTodo={toggleTodo} deleteTodo={deleteTodo} updateTodo={updateTodo} networkError={networkError} />
             <NetworkNotification networkError={networkError} />
         </main>
     )

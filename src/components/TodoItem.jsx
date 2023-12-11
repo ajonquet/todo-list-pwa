@@ -5,7 +5,7 @@ import Done from "@mui/icons-material/Done";
 import {useState} from "react";
 import EditableText from "./EditableText.jsx";
 
-export default function TodoItem({ todo, onToggle, onDelete, onUpdate }) {
+export default function TodoItem({ todo, onToggle, onDelete, onUpdate, disabled }) {
   const [editMode, setEditMode] = useState(false);
 
   const handleEditMode = () => {
@@ -21,7 +21,7 @@ export default function TodoItem({ todo, onToggle, onDelete, onUpdate }) {
     editMode ?
         <EditableText text={todo.text} onUpdate={handleUpdateTodo} onCancel={() => setEditMode(false)} />
       :
-        <button className="todo-text" onClick={onToggle}>
+        <button disabled={disabled} className="todo-text" onClick={onToggle}>
           {todo.text}
         </button>
   );
@@ -31,8 +31,8 @@ export default function TodoItem({ todo, onToggle, onDelete, onUpdate }) {
     <div className={style}>
       {todo.done && <Done />}
       {todoText}
-      <button className="todo-action" onClick={handleEditMode} aria-label="Edit"><Edit /></button>
-      <button className="todo-action" onClick={onDelete} aria-label="delete"><DeleteForever /></button>
+      <button disabled={disabled} className="todo-action" onClick={handleEditMode} aria-label="Edit"><Edit /></button>
+      <button disabled={disabled} className="todo-action" onClick={onDelete} aria-label="delete"><DeleteForever /></button>
     </div>
   );
 }
@@ -46,4 +46,5 @@ TodoItem.propTypes = {
   onToggle: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
   onUpdate: PropTypes.func.isRequired,
+  disabled: PropTypes.bool.isRequired,
 };

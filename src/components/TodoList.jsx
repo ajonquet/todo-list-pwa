@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import TodoItem from "./TodoItem.jsx";
 import LinearProgress from '@mui/material/LinearProgress';
 
-export default function TodoList({todos, isLoading, deleteTodo, toggleTodo, updateTodo}) {
+export default function TodoList({todos, isLoading, deleteTodo, toggleTodo, updateTodo, networkError}) {
   return (
     <div className="main-list">
       {
@@ -17,6 +17,7 @@ export default function TodoList({todos, isLoading, deleteTodo, toggleTodo, upda
                 onToggle={() => toggleTodo(todo.id)}
                 onDelete={() => deleteTodo(todo.id)}
                 onUpdate={(text) => updateTodo(todo.id, text)}
+                disabled={networkError}
               />
             ))
       }
@@ -33,7 +34,8 @@ TodoList.propTypes = {
   isLoading: PropTypes.bool,
   deleteTodo: PropTypes.func.isRequired,
   toggleTodo: PropTypes.func.isRequired,
-  updateTodo: PropTypes.func.isRequired
+  updateTodo: PropTypes.func.isRequired,
+  networkError: PropTypes.bool.isRequired,
 };
 
 TodoList.defaultProps = {
