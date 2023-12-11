@@ -51,10 +51,10 @@ export async function addApiTodo(text) {
 }
 
 export async function isApiReachable() {
-    const resp = await fetch(api, {method:"HEAD"});
-    if (resp.ok) {
-        return true;
-    } else {
-        throw new Error(`todos network error : ${resp.status}`);
+    try {
+        return (await fetch(api, {method:"HEAD"})).ok
+    }
+    catch {
+        return false;
     }
 }

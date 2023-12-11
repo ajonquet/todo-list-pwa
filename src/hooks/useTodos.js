@@ -7,16 +7,13 @@ export default function useTodos() {
     const [networkError, setNetworkError] = useState(false);
 
     const checkNetwork = useCallback(async () => {
-        isApiReachable()
-        .then(() => {
-            console.log("networkError", false)
+        if (await isApiReachable()) {
             setNetworkError(false)
             getAllTodos()
-        })
-        .catch(() => {
-            console.log("networkError", true)
+        }
+        else {
             setNetworkError(true)
-        });
+        }
     }, [])
     
 
