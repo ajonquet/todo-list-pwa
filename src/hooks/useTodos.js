@@ -1,10 +1,29 @@
-import {useEffect, useState} from "react";
-import {addApiTodo, deleteApiTodo, getApiTodos, updateApiTodo} from "../services/todos.js";
+import {useCallback, useEffect, useState} from "react";
+import {addApiTodo, deleteApiTodo, getApiTodos, isApiReachable, updateApiTodo} from "../services/todos.js";
 
 export default function useTodos() {
     const [todos, setTodos] = useState([]);
     const [isLoading, setLoading] = useState(true);
     const [networkError, setNetworkError] = useState(false);
+
+    const checkNetwork = useCallback(async () => {
+        isApiReachable()
+        .then(() => {
+            console.log("networkError", false)
+            setNetworkError(false)
+            getAllTodos()
+        })
+        .catch(() => {
+            console.log("networkError", true)
+            setNetworkError(true)
+        });
+    }, [])
+    
+
+    useEffect(() => {
+        window.addEventListener("offline", checkNetwork);
+        window.addEventListener("online", checkNetwork);
+    }, [checkNetwork]);
 
     useEffect(() => {
         getAllTodos()
@@ -87,5 +106,6 @@ export default function useTodos() {
         updateTodo,
         getTodos,
         networkError,
+        checkNetwork
     }
 }

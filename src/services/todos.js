@@ -49,3 +49,12 @@ export async function addApiTodo(text) {
         throw new Error(`todos network error : ${resp.status}`);
     }
 }
+
+export async function isApiReachable() {
+    const resp = await fetch(api, {method:"HEAD"});
+    if (resp.ok) {
+        return true;
+    } else {
+        throw new Error(`todos network error : ${resp.status}`);
+    }
+}
