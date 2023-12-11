@@ -1,6 +1,5 @@
 import { useCallback, useState, useEffect } from "react"
 import { useRegisterSW } from 'virtual:pwa-register/react'
-import {Workbox} from 'workbox-window'
 
 export default () => {
   const [isInstallable, setIsInstallable] = useState(false);
@@ -37,24 +36,13 @@ export default () => {
     const { outcome } = await installPromptEvent.userChoice;
     setInstallPromptEvent(null);
     return outcome;
+
   }, [isInstallable, installPromptEvent])
-  
-  const updatePwa = () => {
-    updateServiceWorker();
-    const wb = new Workbox('/sw.js');
-    wb.addEventListener('waiting', () => {
-      wb.addEventListener('controlling', () => {
-        window.location.reload();
-      });
-      wb.messageSkipWaiting();
-    });
-    wb.register();
-  }
 
   return {
     isInstallable,
     installPwa,
     hasUpdate: needRefresh[0],
-    updatePwa,
+    updatePwa: updateServiceWorker,
   }
 }
