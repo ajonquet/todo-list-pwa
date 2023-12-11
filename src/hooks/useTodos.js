@@ -4,6 +4,7 @@ import {addApiTodo, deleteApiTodo, getApiTodos, updateApiTodo} from "../services
 export default function useTodos() {
     const [todos, setTodos] = useState([]);
     const [isLoading, setLoading] = useState(true);
+    const [networkError, setNetworkError] = useState(false);
 
     useEffect(() => {
         getAllTodos()
@@ -37,6 +38,7 @@ export default function useTodos() {
           .catch((err) => {
               /* Network error */
               console.log(err.message);
+              setNetworkError(true);
           });
     };
 
@@ -48,6 +50,7 @@ export default function useTodos() {
           .catch((err) => {
               /* Network error */
               console.log(err.message);
+              setNetworkError(true);
           });
     };
 
@@ -59,6 +62,7 @@ export default function useTodos() {
           .catch((err) => {
               /* Network error */
               console.log(err.message);
+              setNetworkError(true);
           });
     };
 
@@ -70,6 +74,7 @@ export default function useTodos() {
           .catch((err) => {
               /* Network error */
               console.log(err.message);
+              setNetworkError(true);
           });
     };
 
@@ -81,5 +86,6 @@ export default function useTodos() {
         deleteTodo,
         updateTodo,
         getTodos,
+        networkError,
     }
 }

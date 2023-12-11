@@ -119,3 +119,16 @@ input[type="submit"] {
   padding: .5em;
   cursor: pointer;
 }
+.network-notification {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f11;
+  margin-left: -1rem;
+  padding: 0.5em;
+  color: #fdd;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
